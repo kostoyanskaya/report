@@ -73,3 +73,5 @@ Werkzeug==2.0.2
 WTForms==3.0.0
 x-wr-timezone==2.0.1
 zipp==3.21.0
+gunicorn==20.1.0
+psycopg2-binary==2.9.9
