@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Генератор отчетов</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Генератор отчетов дорожных сетей</h1>
+        
+        <div class="upload-area">
+            <input type="file" id="csvFile" accept=".csv" required>
+            <button id="uploadBtn" type="button" class="btn-primary">Загрузить и сгенерировать</button>
+        </div>
+        
+        <div id="statusMessage" class="hidden"></div>
+        
+        <div id="downloadSection" class="hidden">
+            <h2>Отчет готов!</h2>
+            <button id="downloadBtn" type="button">Скачать отчет</button>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
