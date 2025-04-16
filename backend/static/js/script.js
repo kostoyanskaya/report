@@ -1,22 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Document ready'); // Debug
+    console.log('Document ready');
     
-    // Получаем элементы
     const csvFileInput = document.getElementById('csvFile');
     const uploadBtn = document.getElementById('uploadBtn');
     const downloadBtn = document.getElementById('downloadBtn');
     const statusMessage = document.getElementById('statusMessage');
     const downloadSection = document.getElementById('downloadSection');
     
-    // Проверяем, что все элементы найдены
     if (!csvFileInput || !uploadBtn || !statusMessage || !downloadSection || !downloadBtn) {
         console.error('One or more elements not found!');
         return;
     }
     
     let currentReportId = null;
-    
-    // Функция для получения CSRF токена
     function getCSRFToken() {
         const cookieValue = document.cookie
             .split('; ')
@@ -24,10 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             ?.split('=')[1];
         return cookieValue || '';
     }
-    
-    // Обработчик загрузки файла
     uploadBtn.addEventListener('click', function() {
-        console.log('Upload button clicked'); // Debug
+        console.log('Upload button clicked');
         
         const file = csvFileInput.files[0];
         if (!file) {
@@ -61,13 +55,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            console.log('Upload success:', data); // Debug
+            console.log('Upload success:', data);
             currentReportId = data.id;
             showStatus('Файл успешно обработан! ID: ' + data.id, 'success');
             downloadSection.classList.remove('hidden');
         })
         .catch(error => {
-            console.error('Upload error:', error); // Debug
+            console.error('Upload error:', error);
             const errorMsg = error.error || 'Произошла ошибка при обработке файла';
             showStatus(errorMsg, 'error');
         })
@@ -75,15 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
             uploadBtn.disabled = false;
         });
     });
-    
-    // Обработчик скачивания файла
     downloadBtn.addEventListener('click', function() {
         if (!currentReportId) {
             showStatus('Нет доступного отчета для скачивания', 'error');
             return;
         }
-        
-        // Самый надежный способ скачивания
         const link = document.createElement('a');
         link.href = `/media/reports/report_${currentReportId}.docx`;
         link.download = `road_report_${currentReportId}.docx`;
@@ -91,14 +81,10 @@ document.addEventListener('DOMContentLoaded', function() {
         link.click();
         document.body.removeChild(link);
     });
-    
-    // Функция для отображения статуса
     function showStatus(message, type) {
         statusMessage.textContent = message;
         statusMessage.className = type;
         statusMessage.style.display = 'block';
-        
-        // Автоматическое скрытие через 5 секунд
         if (type !== 'info') {
             setTimeout(() => {
                 statusMessage.style.display = 'none';
@@ -106,6 +92,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Debug: проверяем доступность кнопки
     console.log('Upload button state:', uploadBtn.disabled);
 });
