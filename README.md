@@ -23,7 +23,7 @@
 - Nginx
 - Gunicorn
 
-##  Для локальной установка
+##  Для локальной установки
 
 ### 1. Клонирование репозитория
 ```
@@ -77,7 +77,7 @@ cd backend
 Добавьте в него переменные
 SECRET_KEY=django-insecure-your-secret-key-here
 DEBUG=True
-ALLOWED_HOSTS=45.90.33.93,localhost,127.0.0.1
+ALLOWED_HOSTS=localhost,127.0.0.1
 ```
 
 9. Применение миграций
